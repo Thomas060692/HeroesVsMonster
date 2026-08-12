@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HeroesVsMonster_Labo.Characters
+﻿namespace HeroesVsMonster_Labo.Characters
 {
     internal class Nain : Hero
     {
+        private int EnduranceRacialeBonus = 2;
+
         public Nain(Dice dice) : base(dice)
         {
         }
 
-        public override void Strike(Dice dice)
+        public override int Strike(Dice dice)
         {
+            int damage = dice.Throw();
 
+            damage = CalculateStatistic(Strength);
+
+            return damage;
         }
     }
 }

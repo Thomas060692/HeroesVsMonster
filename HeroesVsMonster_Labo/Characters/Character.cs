@@ -2,19 +2,19 @@
 {
     internal abstract class Character
     {
-        public int Endurance { get; protected init; }
-        public int Strength { get; protected init; }
+        public int Endurance { get; private init; }
+        public int Strength { get; private init; }
         private int Life { get; set; }
 
         protected Character(Dice dice)
         {
             Endurance = InitiateStatistics(dice);
             Strength = InitiateStatistics(dice);
-            Life = InitiateStatistics(Endurance);
+            Life = CalculateStatistic(Endurance);
         }
-        public event Action? OnStrikeEnvent;
+        public event Action? OnStrikeEvent;
 
-        public abstract void Strike(Dice dice);
+        public abstract int Strike(Dice dice);
 
 
         private int InitiateStatistics(Dice dice) 
@@ -49,7 +49,7 @@
             return sum;
         }
 
-        protected int InitiateStatistics(int caracteristic)
+        protected int CalculateStatistic(int caracteristic)
         {
             if (caracteristic < 5)
             {
@@ -73,7 +73,7 @@
 
         protected void InvokeOnStrikeEvent()
         {
-            OnStrikeEnvent?.Invoke();
+            OnStrikeEvent?.Invoke();
         }
     }
 }

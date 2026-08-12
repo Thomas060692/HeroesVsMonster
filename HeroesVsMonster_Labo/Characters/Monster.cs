@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HeroesVsMonster_Labo.Characters
+﻿namespace HeroesVsMonster_Labo.Characters
 {
     internal abstract class Monster : Character
     {
