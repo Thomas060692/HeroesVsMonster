@@ -11,9 +11,14 @@ namespace HeroesVsMonster_Labo
 
             Character c = new Nain(d6);
             int test = c.Strike(d4);
+            c.SubscibeToCombat();
 
             Character c1 = new Human(d6);
             int test1 = c1.Strike(d4);
+            c1.SubscibeToCombat();
+
+            c1.InvokeOnCalcutaleLifeEvent(c.Strike(d4));
+
             Console.WriteLine();
         }
     }

@@ -20,11 +20,15 @@
 
             return CalculateStatistic(Strength, damage);
         }
-        // TODO:
-        // creat a methode subscriber for setting combat
+
+        public void SubscibeToCombat()
+        {
+            OnCalcutaleLifeEvent += DealDamage;
+        }
+
         protected int DealDamage(int damage)
         {
-            return Life -= damage;
+            return -damage;
         }
 
         private int InitiateStatistics(Dice dice) 
@@ -61,24 +65,7 @@
 
         protected int CalculateStatistic(int caracteristic)
         {
-            if (caracteristic < 5)
-            {
-                caracteristic--;
-            }
-            else if (caracteristic < 10)
-            {
-                return caracteristic;
-            }
-            else if (caracteristic < 15)
-            {
-                caracteristic++;
-            }
-            else
-            {
-                caracteristic += 2;
-            }
-
-            return caracteristic;
+            return caracteristic += ((caracteristic / 5) - 1);
         }
 
         protected int CalculateStatistic(int caracteristic, int damage)
@@ -103,11 +90,11 @@
             return damage;
         }
 
-        protected void InvokeOnCalcutaleLifeEvent(int end)
+        public void InvokeOnCalcutaleLifeEvent(int end)
         {
             if (OnCalcutaleLifeEvent != null) 
             { 
-                Life += OnCalcutaleLifeEvent!.Invoke(end);
+               Life += OnCalcutaleLifeEvent!.Invoke(end);
             }
         }
     }
