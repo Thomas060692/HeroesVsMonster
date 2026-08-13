@@ -2,17 +2,20 @@
 {
     internal class Nain : Hero
     {
-        private int EnduranceRacialeBonus = 2;
+        public int EnduranceRacialeBonus { get; } = 2;
 
         public Nain(Dice dice) : base(dice)
         {
+            OnCalcutaleLifeEvent += CalculateLife;
+            InvokeOnCalcutaleLifeEvent(Endurance + EnduranceRacialeBonus);
+            OnCalcutaleLifeEvent -= CalculateLife;
         }
 
         public override int Strike(Dice dice)
         {
             int damage = dice.Throw();
 
-            damage = CalculateStatistic(Strength);
+           // damage += CalculateStatistic(Strength);
 
             return damage;
         }

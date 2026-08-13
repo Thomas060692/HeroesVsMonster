@@ -10,12 +10,11 @@
         {
             Endurance = InitiateStatistics(dice);
             Strength = InitiateStatistics(dice);
-            Life = CalculateStatistic(Endurance);
         }
-        public event Action? OnStrikeEvent;
+
+        public event Func<int, int>? OnCalcutaleLifeEvent = null;
 
         public abstract int Strike(Dice dice);
-
 
         private int InitiateStatistics(Dice dice) 
         {
@@ -49,7 +48,7 @@
             return sum;
         }
 
-        protected int CalculateStatistic(int caracteristic)
+        protected int CalculateLife(int caracteristic)
         {
             if (caracteristic < 5)
             {
@@ -71,9 +70,12 @@
             return caracteristic;
         }
 
-        protected void InvokeOnStrikeEvent()
+        protected void InvokeOnCalcutaleLifeEvent(int end)
         {
-            OnStrikeEvent?.Invoke();
+            if (OnCalcutaleLifeEvent != null) 
+            { 
+                Life = OnCalcutaleLifeEvent!.Invoke(end);
+            }
         }
     }
 }
