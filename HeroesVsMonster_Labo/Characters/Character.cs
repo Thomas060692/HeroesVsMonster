@@ -12,9 +12,20 @@
             Strength = InitiateStatistics(dice);
         }
 
-        public event Func<int, int>? OnCalcutaleLifeEvent = null;
+        protected event Func<int, int>? OnCalcutaleLifeEvent = null;
 
-        public abstract int Strike(Dice dice);
+        public virtual int Strike(Dice dice)
+        {
+            int damage = dice.Throw();
+
+            return CalculateStatistic(Strength, damage);
+        }
+        // TODO:
+        // creat a methode subscriber for setting combat
+        protected int DealDamage(int damage)
+        {
+            return Life -= damage;
+        }
 
         private int InitiateStatistics(Dice dice) 
         {
@@ -48,7 +59,7 @@
             return sum;
         }
 
-        protected int CalculateLife(int caracteristic)
+        protected int CalculateStatistic(int caracteristic)
         {
             if (caracteristic < 5)
             {
@@ -70,11 +81,33 @@
             return caracteristic;
         }
 
+        protected int CalculateStatistic(int caracteristic, int damage)
+        {
+            if (caracteristic < 5)
+            {
+                damage--;
+            }
+            else if (caracteristic < 10)
+            {
+                return damage;
+            }
+            else if (caracteristic < 15)
+            {
+                damage++;
+            }
+            else
+            {
+                damage += 2;
+            }
+
+            return damage;
+        }
+
         protected void InvokeOnCalcutaleLifeEvent(int end)
         {
             if (OnCalcutaleLifeEvent != null) 
             { 
-                Life = OnCalcutaleLifeEvent!.Invoke(end);
+                Life += OnCalcutaleLifeEvent!.Invoke(end);
             }
         }
     }

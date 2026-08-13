@@ -6,18 +6,9 @@
 
         public Nain(Dice dice) : base(dice)
         {
-            OnCalcutaleLifeEvent += CalculateLife;
+            OnCalcutaleLifeEvent += CalculateStatistic;
             InvokeOnCalcutaleLifeEvent(Endurance + EnduranceRacialeBonus);
-            OnCalcutaleLifeEvent -= CalculateLife;
-        }
-
-        public override int Strike(Dice dice)
-        {
-            int damage = dice.Throw();
-
-           // damage += CalculateStatistic(Strength);
-
-            return damage;
+            OnCalcutaleLifeEvent -= CalculateStatistic;
         }
     }
 }

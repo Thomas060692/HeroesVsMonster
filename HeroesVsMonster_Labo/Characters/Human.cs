@@ -11,14 +11,16 @@ namespace HeroesVsMonster_Labo.Characters
 
         public Human(Dice dice) : base(dice)
         {
-            OnCalcutaleLifeEvent += CalculateLife;
+            OnCalcutaleLifeEvent += CalculateStatistic;
             InvokeOnCalcutaleLifeEvent(Endurance + EnduranceRacialeBonus);
-            OnCalcutaleLifeEvent -= CalculateLife;
+            OnCalcutaleLifeEvent -= CalculateStatistic;
         }
 
         public override int Strike(Dice dice)
         {
-            throw new NotImplementedException();
+            int damage = dice.Throw();
+
+            return CalculateStatistic(Strength + StrengthRacialeBonus, damage);
         }
     }
 }
