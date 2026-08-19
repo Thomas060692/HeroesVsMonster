@@ -1,9 +1,11 @@
-﻿namespace HeroesVsMonster_Labo.Characters
+﻿using HeroesVsMonster_Labo.Interface;
+
+namespace HeroesVsMonster_Labo.Characters
 {
-    internal abstract class Character
+    internal abstract class Character : ICharacter
     {
-        public int Endurance { get; private init; }
-        public int Strength { get; private init; }
+        public int Endurance { get; }
+        public int Strength { get; }
         private int Life { get; set; }
 
         protected Character(Dice dice)
@@ -21,12 +23,12 @@
             return CalculateStatistic(Strength, damage);
         }
 
-        public void SubscibeToCombat()
+        public void SubscribeToCombat()
         {
-            OnCalcutaleLifeEvent += DealDamage;
+            OnCalcutaleLifeEvent += GetDamage;
         }
 
-        protected int DealDamage(int damage)
+        protected int GetDamage(int damage)
         {
             return -damage;
         }
