@@ -5,5 +5,7 @@
         protected Monster(Dice dice) : base(dice)
         {
         }
+
+        public abstract LootEnum Drop();
     }
 }

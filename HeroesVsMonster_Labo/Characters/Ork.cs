@@ -1,15 +1,11 @@
 ﻿namespace HeroesVsMonster_Labo.Characters
 {
-    internal class Human : Hero
+    internal class Ork : Monster
     {
-        public int EnduranceRacialeBonus { get; } = 1;
         public int StrengthRacialeBonus { get; } = 1;
 
-        public Human(Dice dice) : base(dice)
+        public Ork(Dice dice) : base(dice)
         {
-            OnCalcutaleLifeEvent += CalculateStatistic;
-            InvokeOnCalcutaleLifeEvent(Endurance + EnduranceRacialeBonus);
-            OnCalcutaleLifeEvent -= CalculateStatistic;
         }
 
         public override int Strike(Dice dice)
@@ -17,6 +13,11 @@
             int damage = dice.Throw();
 
             return CalculateStatistic(Strength + StrengthRacialeBonus, damage);
+        }
+
+        public override LootEnum Drop()
+        {
+            return LootEnum.gold;
         }
     }
 }
